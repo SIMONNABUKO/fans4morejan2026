@@ -413,10 +413,11 @@ const userAvatar = computed(() => {
   return authStore.user?.avatar || 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-uI1JDg5gboqSkniC9SI1Grz2b6DmWa.png'
 })
 
-const postOptions = ref([
+const initialPostOptions = [
   { label: 'Pin to Timeline', checked: false },
   { label: 'Lock Replies', checked: false },
-])
+]
+const postOptions = ref(initialPostOptions.map((option) => ({ ...option })))
 
 const actionButtons = [
   { icon: 'ri-at-line' },
@@ -475,6 +476,18 @@ const close = () => {
   // If a child modal is open, do nothing
 }
 
+const resetComposerState = () => {
+  uploadStore.clearPost()
+  uploadStore.clearMedia()
+  uploadStore.clearTaggedUsers()
+  postOptions.value = initialPostOptions.map((option) => ({ ...option }))
+  scheduledFor.value = null
+  expiresAt.value = null
+  showUserSuggestions.value = false
+  mentionQuery.value = ''
+  userSuggestions.value = []
+}
+
 const removeMedia = (id) => {
   uploadStore.removeMedia(id)
 }
@@ -513,6 +526,7 @@ const handlePostSubmission = async () => {
     
     // Show success feedback
     console.log('Post created successfully!')
+    resetComposerState()
     close() // Close the modal after successful submission
     
     // Refresh the feed to show the new post

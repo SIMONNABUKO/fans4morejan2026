@@ -46,7 +46,7 @@ export const useUploadStore = defineStore("upload", {
     },
     clearMedia() {
       const mediaStore = useMediaUploadStore();
-      mediaStore.clearPreviews(); // Now context-aware
+      mediaStore.clearMedia();
     },
     openPreviewModal() {
       const mediaStore = useMediaUploadStore()
