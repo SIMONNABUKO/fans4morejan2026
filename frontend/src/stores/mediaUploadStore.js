@@ -15,7 +15,17 @@ export const useMediaUploadStore = defineStore("mediaUpload", {
       expires_at: null,
       tagged_users: [],
     },
-    contentByContext: {}, // Will store content, media, permissions for each context
+    contentByContext: {
+      default: {
+        content: "",
+        media: [],
+        permissions: [[{ type: "subscribed_all_tiers", value: null }]],
+        scheduled_for: null,
+        expires_at: null,
+        tagged_users: [],
+        metadata: {},
+      },
+    }, // Will store content, media, permissions for each context
   }),
 
   getters: {
@@ -25,6 +35,8 @@ export const useMediaUploadStore = defineStore("mediaUpload", {
         content: "",
         media: [],
         permissions: [[{ type: "subscribed_all_tiers", value: null }]],
+        scheduled_for: null,
+        expires_at: null,
         tagged_users: [],
       };
     },
@@ -41,6 +53,8 @@ export const useMediaUploadStore = defineStore("mediaUpload", {
           media: [],
           permissions: permissions,
           tagged_users: [],
+          scheduled_for: null,
+          expires_at: null,
           metadata: metadata,
         };
       }
@@ -54,6 +68,9 @@ export const useMediaUploadStore = defineStore("mediaUpload", {
           media: [],
           permissions: [[{ type: "subscribed_all_tiers", value: null }]],
           tagged_users: [], // Add tagged_users field
+          scheduled_for: null,
+          expires_at: null,
+          metadata: {},
         }
       }
       // Update previews to match the current context
@@ -472,4 +489,3 @@ export const useMediaUploadStore = defineStore("mediaUpload", {
     },
   },
 })
-
