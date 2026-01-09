@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .loading { background-color: #d1ecf1; border-color: #bee5eb; }
+        button { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; }
+        .btn-primary { background-color: #007bff; color: white; }
+        .btn-success { background-color: #28a745; color: white; }
+        .btn-danger { background-color: #dc3545; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Production Build Test</h1>
+    
+    <div class="test-section loading" id="main-test">
+        <h3>Main Application Test</h3>
+        <p>Testing main application bundle...</p>
+        <div id="main-result"></div>
+    </div>
+    
+    <div class="test-section loading" id="plans-test">
+        <h3>PlansView Component Test</h3>
+        <p>Testing PlansView component...</p>
+        <div id="plans-result"></div>
+    </div>
+    
+    <div class="test-section loading" id="stores-test">
+        <h3>Store Components Test</h3>
+        <p>Testing store components...</p>
+        <div id="stores-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Manual Tests</h3>
+        <button class="btn-primary" onclick="testMainBundle()">Test Main Bundle</button>
+        <button class="btn-primary" onclick="testPlansView()">Test PlansView</button>
+        <button class="btn-primary" onclick="testStores()">Test Stores</button>
+        <button class="btn-danger" onclick="clearResults()">Clear Results</button>
+    </div>
+    
+    <div class="test-section">
+        <h3>Console Output</h3>
+        <div id="console-output" style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-family: monospace; max-height: 300px; overflow-y: auto;"></div>
+    </div>
+
+    <script>
+        // Capture console output
+        const originalConsole = {
+            log: console.log,
+            error: console.error,
+            warn: console.warn
+        };
+        
+        const consoleOutput = document.getElementById('console-output');
+        
+        function addToConsole(type, ...args) {
+            const timestamp = new Date().toLocaleTimeString();
+            const message = args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+            ).join(' ');
+            
+            const div = document.createElement('div');
+            div.innerHTML = `<span style="color: #666;">[${timestamp}]</span> <span style="color: ${type === 'error' ? 'red' : type === 'warn' ? 'orange' : 'black'};">${message}</span>`;
+            consoleOutput.appendChild(div);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+        
+        console.log = (...args) => {
+            originalConsole.log(...args);
+            addToConsole('log', ...args);
+        };
+        
+        console.error = (...args) => {
+            originalConsole.error(...args);
+            addToConsole('error', ...args);
+        };
+        
+        console.warn = (...args) => {
+            originalConsole.warn(...args);
+            addToConsole('warn', ...args);
+        };
+        
+        function updateTestSection(id, status, message) {
+            const section = document.getElementById(id);
+            const resultDiv = document.getElementById(id + '-result');
+            
+            section.className = `test-section ${status}`;
+            if (resultDiv) {
+                resultDiv.innerHTML = `<p><strong>${status.toUpperCase()}:</strong> ${message}</p>`;
+            }
+        }
+        
+        async function testMainBundle() {
+            updateTestSection('main-test', 'loading', 'Testing main bundle...');
+            
+            try {
+                console.log('Testing main application bundle...');
+                
+                // Test if the main bundle loads without errors
+                const mainModule = await import('./dist/assets/index-BVLyuWpM.js');
+                console.log('Main bundle loaded successfully:', mainModule);
+                
+                updateTestSection('main-test', 'success', 'Main bundle loaded successfully!');
+            } catch (error) {
+                console.error('Main bundle test failed:', error);
+                updateTestSection('main-test', 'error', `Failed: ${error.message}`);
+            }
+        }
+        
+        async function testPlansView() {
+            updateTestSection('plans-test', 'loading', 'Testing PlansView component...');
+            
+            try {
+                console.log('Testing PlansView component...');
+                
+                // Test if PlansView loads without errors
+                const plansModule = await import('./dist/assets/PlansView-B-xCCYdq.js');
+                console.log('PlansView loaded successfully:', plansModule);
+                
+                updateTestSection('plans-test', 'success', 'PlansView component loaded successfully!');
+            } catch (error) {
+                console.error('PlansView test failed:', error);
+                updateTestSection('plans-test', 'error', `Failed: ${error.message}`);
+            }
+        }
+        
+        async function testStores() {
+            updateTestSection('stores-test', 'loading', 'Testing store components...');
+            
+            try {
+                console.log('Testing store components...');
+                
+                // Test if store files load without errors
+                const storeFiles = [
+                    './dist/assets/supportersStore-Cptqi2Se.js',
+                    './dist/assets/subscribersStore-OTlaQuIk.js'
+                ];
+                
+                for (const file of storeFiles) {
+                    try {
+                        const storeModule = await import(file);
+                        console.log(`Store loaded successfully: ${file}`, storeModule);
+                    } catch (error) {
+                        console.warn(`Store file not found or error: ${file}`, error.message);
+                    }
+                }
+                
+                updateTestSection('stores-test', 'success', 'Store components tested successfully!');
+            } catch (error) {
+                console.error('Stores test failed:', error);
+                updateTestSection('stores-test', 'error', `Failed: ${error.message}`);
+            }
+        }
+        
+        function clearResults() {
+            document.getElementById('console-output').innerHTML = '';
+            updateTestSection('main-test', 'loading', 'Ready to test...');
+            updateTestSection('plans-test', 'loading', 'Ready to test...');
+            updateTestSection('stores-test', 'loading', 'Ready to test...');
+        }
+        
+        // Auto-run tests on page load
+        window.addEventListener('load', () => {
+            console.log('Production test page loaded');
+            setTimeout(() => {
+                testMainBundle();
+                setTimeout(() => {
+                    testPlansView();
+                    setTimeout(() => {
+                        testStores();
+                    }, 1000);
+                }, 1000);
+            }, 500);
+        });
+    </script>
+</body>
+</html> 

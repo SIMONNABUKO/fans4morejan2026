@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom utility classes */
+@layer utilities {
+  .scrollbar-hide {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    -webkit-scrollbar {
+      display: none;
+    }
+    
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  /* Mobile-optimized scrolling */
+  .mobile-scroll {
+    /* Enable momentum-based scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+    /* Prevent elastic bouncing on iOS */
+    overscroll-behavior-x: contain;
+    /* Ensure smooth scrolling */
+    scroll-behavior: smooth;
+    /* Optimize for touch devices */
+    touch-action: pan-x;
+  }
+
+  /* Better touch targets for mobile */
+  .touch-friendly {
+    min-height: 44px; /* iOS recommended touch target size */
+    min-width: 44px;
+  }
+
+  /* Blur utility classes for content (posts and messages) */
+  .blur-content-1 {
+    filter: blur(4px);
+    transition: filter 0.3s ease;
+  }
+
+  .blur-content-2 {
+    filter: blur(8px);
+    transition: filter 0.3s ease;
+  }
+
+  .blur-content-3 {
+    filter: blur(16px);
+    transition: filter 0.3s ease;
+  }
+
+  /* Hover effect to temporarily remove blur */
+  .blur-content-1:hover,
+  .blur-content-2:hover,
+  .blur-content-3:hover {
+    filter: blur(0px);
+  }
+
+  /* Blur overlay for better UX */
+  .blur-overlay {
+    position: relative;
+  }
+
+  .blur-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+    z-index: 1;
+  }
+}

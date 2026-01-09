@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Build</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Testing JavaScript Files</h1>
+        <p>Check console for any errors</p>
+    </div>
+    
+    <script type="module" src="dist/assets/index-BVLyuWpM.js"></script>
+    <script>
+        // Test if the main file loads without errors
+        console.log('HTML loaded successfully');
+        
+        // Test if we can access the PlansView component
+        setTimeout(() => {
+            console.log('Testing PlansView component...');
+            try {
+                // This will test if the PlansView component can be loaded
+                import('./dist/assets/PlansView-B-xCCYdq.js').then(module => {
+                    console.log('PlansView loaded successfully:', module);
+                }).catch(error => {
+                    console.error('PlansView load error:', error);
+                });
+            } catch (error) {
+                console.error('Error testing PlansView:', error);
+            }
+        }, 1000);
+    </script>
+</body>
+</html> 

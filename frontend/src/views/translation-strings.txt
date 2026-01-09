@@ -1,0 +1,104 @@
+Display
+Fansformore Language
+Fansformore is available in multiple languages. Select the language you wish to view the website in!
+Loading profile...
+Loading...
+Account
+Username (Profile)
+For your privacy protection, creator usernames can only be changed by contacting Fans4more support.
+Display Name
+Change
+Email
+Change Email
+Manage 2FA
+Your account is protected with 2FA!
+2FA is not enabled for your account.
+Remove 2FA
+Enable 2FA
+Password
+Change Password
+Account Status
+Delete Account
+Notifications
+Push Notifications
+Enable Push Notifications to unlock settings.
+Email Notifications
+New Messages
+Subscription Purchases
+Subscription Renews
+Subscription Gift Link Purchases
+Media Purchases
+Media Bundle Purchases
+Media Likes
+Post Replies
+Post Likes
+Tips Received
+New Followers
+Stream Live
+Profile
+Subscriptions
+My Media
+Scheduled Post Queue
+Lists
+Messages
+Creator Dashboard
+Earning Statistics
+Profile Statistics
+Referrals
+Add Payment Method
+Add Withdrawal Method
+Terms
+Privacy Policy
+Settings
+Language
+Logout
+Light Mode
+Dark Mode
+Become a Creator
+Edit Post
+Add To List
+Unfollow
+Subscribe to
+Copy Post Link
+Report Post
+VIP
+Mute
+Block
+Active Now
+Offline
+Failed to load profile. Please try again.
+Sign up
+Login
+By joining, you agree to our
+Terms & Conditions
+Privacy Policy
+and confirm that you are at least 18 years old.
+Sign in with Twitter
+Sign in with Google
+Sign in with Twitch
+Contact
+Explore Fans4more
+Terms of Service
+Complaint Process
+Forgot password?
+Create Account
+Name
+Username
+Email address
+Unlock Content
+Choose an option to unlock this content:
+Subscribe
+Follow
+Pay
+Recommended
+Already subscribed
+Subscribe to any tier
+Already following
+Follow creator
+Already paid
+Pay $
+You are already subscribed to all available tiers.
+Content unlocked successfully!
+Please complete your payment on the payment page
+Insufficient wallet balance. Please add funds to your wallet.
+Failed to process payment 
